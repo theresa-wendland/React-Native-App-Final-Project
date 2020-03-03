@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Home from "./HomeComponent";
 import About from "./AboutComponent";
 import Contact from "./ContactComponent";
-import Reservation from "./ReservationComponent";
 import Favorites from "./FavoritesComponent";
 import Login from "./LoginComponent";
 import Directory from "./DirectoryComponent";
@@ -29,7 +28,8 @@ import {
   fetchCampsites,
   fetchComments,
   fetchPromotions,
-  fetchPartners
+  fetchPartners,
+  campsitesFailed
 } from "../redux/ActionCreators";
 import NetInfo from "@react-native-community/netinfo";
 
@@ -47,7 +47,7 @@ const DirectoryNavigator = createStackNavigator(
       navigationOptions: ({ navigation }) => ({
         headerLeft: (
           <Icon
-            name="list"
+            name="bars"
             type="font-awesome"
             iconStyle={styles.stackIcon}
             onPress={() => navigation.toggleDrawer()}
@@ -61,7 +61,7 @@ const DirectoryNavigator = createStackNavigator(
     initialRouteName: "Directory",
     navigationOptions: {
       headerStyle: {
-        backgroundColor:  "#DD7848"
+        backgroundColor: "#6a0dad"
       },
       headerTintColor: "#fff",
       headerTitleStyle: {
@@ -78,8 +78,9 @@ const HomeNavigator = createStackNavigator(
   {
     navigationOptions: ({ navigation }) => ({
       headerStyle: {
-        backgroundColor: "#DD7848"
+        backgroundColor: "#6a0dad"
       },
+     
       headerTintColor: "#ffff",
       headerTitleStyle: {
         color: "white"
@@ -93,27 +94,28 @@ const HomeNavigator = createStackNavigator(
         />
       ),
       headerRight: (
-        <View>
-        <View>
-        <Icon
-          name="cart-plus"
+        <View style={{flexDirection:"row"}}>
+          <Icon 
+            name="cart-plus"
+            type="font-awesome"
+            iconStyle={styles.stackIcon}
+            onPress={() => navigation.toggleDrawer()}
+          />
+
+          <Icon
+            name="user"
+            type="font-awesome"
+            iconStyle={styles.stackIcon}
+            onPress={() => navigation.toggleDrawer()}
+          />
+          <Icon 
+          name="search"
           type="font-awesome"
           iconStyle={styles.stackIcon}
           onPress={() => navigation.toggleDrawer()}
         />
         </View>
-        <View>
-        <Icon
-        name="user"
-        type="font-awesome"
-        iconStyle={styles.stackIcon}
-        onPress={() => navigation.toggleDrawer()}
-      />
-      </View>
-      </View>
-        
       )
-      
     })
   }
 );
@@ -125,7 +127,7 @@ const AboutNavigator = createStackNavigator(
   {
     navigationOptions: ({ navigation }) => ({
       headerStyle: {
-        backgroundColor:  "#DD7848"
+        backgroundColor: "#6a0dad"
       },
       headerTintColor: "#fff",
       headerTitleStyle: {
@@ -133,7 +135,7 @@ const AboutNavigator = createStackNavigator(
       },
       headerLeft: (
         <Icon
-          name="info-circle"
+          name="bars"
           type="font-awesome"
           iconStyle={styles.stackIcon}
           onPress={() => navigation.toggleDrawer()}
@@ -150,7 +152,7 @@ const ContactNavigator = createStackNavigator(
   {
     navigationOptions: ({ navigation }) => ({
       headerStyle: {
-        backgroundColor:  "#DD7848"
+        backgroundColor: "#6a0dad"
       },
       headerTintColor: "#fff",
       headerTitleStyle: {
@@ -158,7 +160,7 @@ const ContactNavigator = createStackNavigator(
       },
       headerLeft: (
         <Icon
-          name="address-card"
+          name="bars"
           type="font-awesome"
           iconStyle={styles.stackIcon}
           onPress={() => navigation.toggleDrawer()}
@@ -175,7 +177,7 @@ const FavoritesNavigator = createStackNavigator(
   {
     navigationOptions: ({ navigation }) => ({
       headerStyle: {
-        backgroundColor:  "#DD7848"
+        backgroundColor: "#6a0dad"
       },
       headerTintColor: "#fff",
       headerTitleStyle: {
@@ -183,7 +185,7 @@ const FavoritesNavigator = createStackNavigator(
       },
       headerLeft: (
         <Icon
-          name="heart"
+          name="bars"
           type="font-awesome"
           iconStyle={styles.stackIcon}
           onPress={() => navigation.toggleDrawer()}
@@ -200,7 +202,7 @@ const LoginNavigator = createStackNavigator(
   {
     navigationOptions: ({ navigation }) => ({
       headerStyle: {
-        backgroundColor:  "#DD7848"
+        backgroundColor: "#6a0dad"
       },
       headerTintColor: "#fff",
       headerTitleStyle: {
@@ -208,12 +210,11 @@ const LoginNavigator = createStackNavigator(
       },
       headerLeft: (
         <Icon
-          name="sign-in"
+          name="bars"
           type="font-awesome"
           iconStyle={styles.stackIcon}
           onPress={() => navigation.toggleDrawer()}
         />
-        
       )
     })
   }
@@ -272,11 +273,11 @@ const MainNavigator = createDrawerNavigator(
         )
       }
     },
-  
+
     Favorites: {
       screen: FavoritesNavigator,
       navigationOptions: {
-        drawerLabel: "My Favorites",
+        drawerLabel: " Wish List",
         drawerIcon: ({ tintColor }) => (
           <Icon name="heart" type="font-awesome" size={24} color={tintColor} />
         )
@@ -384,7 +385,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   drawerHeader: {
-    backgroundColor: "#DD7848",
+    backgroundColor: "#6a0dad",
     height: 140,
     alignItems: "center",
     justifyContent: "center",
@@ -404,11 +405,10 @@ const styles = StyleSheet.create({
   stackIcon: {
     marginLeft: 10,
     marginRight: 10,
+    flexDirection: "column",
     color: "#fff",
     fontSize: 24,
     
-    
-
   }
 });
 

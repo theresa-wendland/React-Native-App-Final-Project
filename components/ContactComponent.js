@@ -29,7 +29,7 @@ class Contact extends Component {
             <Text style={{ marginBottom: 10 }}>Email: campsites@nucamp.co</Text>
             <Button
               title="Send Email"
-              buttonStyle={{ backgroundColor: "#5637DD", margin: 40 }}
+              buttonStyle={{ backgroundColor:"#6a0dad", margin: 40 }}
               icon={
                 <Icon
                   name="envelope-o"

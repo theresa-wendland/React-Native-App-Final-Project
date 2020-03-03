@@ -9,9 +9,11 @@ import {
   StyleSheet,
   Alert,
   PanResponder,
-  Share
+  Share,
+  Divider,
+  Avatar
 } from "react-native";
-import { Card, Icon, Rating, Input } from "react-native-elements";
+import { Card, Icon, Rating, Input, Image } from "react-native-elements";
 import { connect } from "react-redux";
 import { baseUrl } from "../shared/baseUrl";
 import { postFavorite, postComment } from "../redux/ActionCreators";
@@ -100,23 +102,20 @@ function RenderCampsite(props) {
         ref={view}
         {...panResponder.panHandlers}
       >
-        <Card
-          featuredTitle={campsite.name}
-          image={{ uri: baseUrl + campsite.image }}
-        >
+        <Card title={campsite.name} image={{ uri: baseUrl + campsite.image }}>
           <Text style={{ margin: 10 }}>{campsite.description}</Text>
           <View style={styles.cardRow}>
             <Icon
-              name={props.favorite ? "cart-plus" : "heart-o"}
+              name="cart-plus"
               type="font-awesome"
-              color="#f50"
+              color="#413F41"
               raised
               reverse
             />
             <Icon
               name={props.favorite ? "heart" : "heart-o"}
               type="font-awesome"
-              color="#f50"
+              color="#413F41"
               raised
               reverse
               onPress={() =>
@@ -125,22 +124,14 @@ function RenderCampsite(props) {
                   : props.markFavorite()
               }
             />
-            <Icon
-              name="pencil"
-              type="font-awesome"
-              color="#5637DD"
-              style={styles.cardItem}
-              raised
-              reverse
-              onPress={() => props.onShowModal()}
-            />
+
             <Icon
               name={"share"}
               type="font-awesome"
-              color="#5637DD"
+              color="#413F41"
               style={styles.cardItem}
               raised
-              reversed
+              reverse
               onPress={() =>
                 shareCampsite(
                   campsite.name,
@@ -229,7 +220,7 @@ class CampsiteInfo extends Component {
   }
 
   static navigationOptions = {
-    title: "Campsite Information"
+    title: "Product Details "
   };
 
   render() {
@@ -256,32 +247,18 @@ class CampsiteInfo extends Component {
           onRequestClose={() => this.toggleModal()}
         >
           <View style={styles.modal}>
-            <Rating
-              showRating
-              startingValue={this.state.rating}
-              imageSize={40}
-              onFinishRating={rating => this.setState({ rating: rating })}
-              style={{ paddingVertical: 10 }}
-            ></Rating>
-            <Input
-              placeholder="Author"
-              leftIcon={{ type: "font-awesome", name: "user-o" }}
-              leftIconContainerStyle={{ paddingRight: 10 }}
-              onChangeText={text => this.setState({ author: text })}
-              value={this.state.author}
-            />
-            <Input
-              placeholder="Comment"
-              leftIcon={{ type: "font-awesome", name: "comment-o" }}
-              leftIconContainerStyle={{ paddingRight: 10 }}
-              onChangeText={text => this.setState({ comment: text })}
-              value={this.state.comment}
-            />
+            <Card title="Shopping Cart">
+              <Text style={{fontSize:15, fontWeight:"bold", paddingBottom:5}}>Item : {campsite.name} </Text>
+              <Image
+                source={{ uri: baseUrl + campsite.image }}
+                style={{ width: 100, height: 100 }}
+              />
+            </Card>
 
             <View style={{ margin: 10 }}>
               <Button
-                title="SUBMIT"
-                color="#5637DD"
+                title="Checkout"
+                color="#413F41"
                 onPress={() => {
                   this.handleComment(campsiteId);
                   this.resetForm();
@@ -295,8 +272,8 @@ class CampsiteInfo extends Component {
                   this.toggleModal();
                   this.resetForm();
                 }}
-                color="#808080"
-                title="CANCEL"
+                color="#86927B"
+                title="Continue Shopping"
               />
             </View>
           </View>

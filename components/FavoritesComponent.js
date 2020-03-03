@@ -21,7 +21,7 @@ const mapDispatchToProps = {
 
 class Favorites extends Component {
   static navigationOptions = {
-    title: "My Favorites"
+    title: "Wish List"
   };
 
   render() {

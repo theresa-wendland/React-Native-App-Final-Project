@@ -1,9 +1,17 @@
 import React, { Component } from "react";
-import { ScrollView, Text, Animated } from "react-native";
-import { Tile, Header, Card, Button, Icon, View } from "react-native-elements";
+import { ScrollView, Text, Animated, StyleSheet, View } from "react-native";
+import {
+  Tile,
+  Header,
+  Card,
+  Button,
+  Icon,
+  Rating
+} from "react-native-elements";
 import { connect } from "react-redux";
 import { baseUrl } from "../shared/baseUrl";
 import Loading from "./LoadingComponent";
+import MyComponent from "./FooterComponent";
 
 const mapStateToProps = state => {
   return {
@@ -29,9 +37,33 @@ function RenderItem(props) {
 
   if (item) {
     return (
-      <Tile title={item.name} imageSrc={{ uri: baseUrl + item.image }} >
-        <Text style={{ margin: 10, color: "red" ,  backgroundColor:"#86927B" , borderColor:"black" }} > {item.price}</Text>
-        
+      <Tile title={item.name} imageSrc={{ uri: baseUrl + item.image }}>
+        <View style={{ width: 150 }}>
+          <Rating
+            startingValue={item.rating}
+            imageSize={20}
+            style={{ alignItems: "flex-left" }}
+            style={{
+              paddingVertical: 10,
+              backgroundColor: "white",
+              borderColor: "#413F41",
+              borderWidth: 1
+            }}
+            readonly
+          />
+
+          <Button
+            buttonStyle={{
+              backgroundColor: "#86927B",
+              padding: 5,
+              borderWidth: 1,
+              borderColor: "#413F41"
+            }}
+            title={item.price}
+            type="solid"
+            raised="true"
+          />
+        </View>
       </Tile>
     );
   }
@@ -95,9 +127,17 @@ class Home extends Component {
           isLoading={this.props.partners.isLoading}
           errMess={this.props.partners.errMess}
         />
+        <Header
+          backgroundImage={require("../components/images/banner1.jpg")}
+          containerStyle={{
+            backgroundColor: "#31AD96",
+            justifyContent: "space-around",
+            paddingBottom: 0
+          }}
+        />
 
-        <Card
-          style={{ margin: 0, padding: 0 }}
+        <Tile
+          style={{ margin: 0, paddingTop: 0 }}
           title="Connect With Us"
           containerStyle={{
             backgroundColor: "#DD7848",
@@ -108,11 +148,22 @@ class Home extends Component {
           <Text style={{ marginBottom: 10, color: "white" }}>Stores</Text>
           <Text style={{ marginBottom: 10, color: "white" }}>App</Text>
           <Text style={{ marginBottom: 10, color: "white" }}>Social</Text>
+         
           <Button title="Contact Us" type="outline" raised="true" />
-        </Card>
+         
+        </Tile>
       </ScrollView>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "red",
+    alignItems: "center",
+    justifyContent: "center"
+  }
+});
 
 export default connect(mapStateToProps)(Home);

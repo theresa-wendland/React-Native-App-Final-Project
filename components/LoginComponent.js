@@ -95,7 +95,7 @@ class LoginTab extends Component {
                 iconStyle={{ marginRight: 10 }}
               />
             }
-            buttonStyle={{ backgroundColor: "#5637DD" }}
+            buttonStyle={{ backgroundColor:  "#6a0dad"  }}
           />
         </View>
         <View style={styles.formButton}>
@@ -107,11 +107,11 @@ class LoginTab extends Component {
               <Icon
                 name="user-plus"
                 type="font-awesome"
-                color="blue"
+                color="#86927B"
                 iconStyle={{ marginRight: 10 }}
               />
             }
-            titleStyle={{ color: "blue" }}
+            titleStyle={{ color: "#86927B" }}
           />
         </View>
       </View>
@@ -193,7 +193,14 @@ class RegisterTab extends Component {
               loadingIndicatorSource={require("./images/logo.png")}
               style={styles.image}
             />
-            <Button title="Camera" onPress={this.getImageFromCamera} />
+            <Button buttonStyle={{ backgroundColor: "#6a0dad" }} icon={
+              <Icon
+              type="font-awesome"
+                name="camera"
+                size={30}
+                color="white"
+              />
+            }  onPress={this.getImageFromCamera} />
           </View>
           <Input
             placeholder="Username"
@@ -254,7 +261,7 @@ class RegisterTab extends Component {
                   iconStyle={{ marginRight: 10 }}
                 />
               }
-              buttonStyle={{ backgroundColor: "#5637DD" }}
+              buttonStyle={{ backgroundColor: "#6a0dad" }}
             />
           </View>
         </View>
@@ -270,7 +277,7 @@ const Login = createBottomTabNavigator(
   },
   {
     tabBarOptions: {
-      activeBackgroundColor: "#5637DD",
+      activeBackgroundColor: "#6a0dad" ,
       inactiveBackgroundColor: "#CEC8FF",
       activeTintColor: "#fff",
       inactiveTintColor: "#808080",
@@ -301,15 +308,15 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-    margin: 10
-},
-image: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    margin: 20
+  },
+  image: {
     width: 60,
     height: 60
-}
+  }
 });
 
 export default Login;

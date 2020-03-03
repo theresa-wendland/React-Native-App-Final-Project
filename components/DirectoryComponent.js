@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, FlatList } from "react-native";
-import { Tile, Card } from "react-native-elements";
+import { Tile, Card, Text, Button, Icon } from "react-native-elements";
 import { connect } from "react-redux";
 import { baseUrl } from "../shared/baseUrl";
 import Loading from "./LoadingComponent";
@@ -14,7 +14,7 @@ const mapStateToProps = state => {
 
 class Directory extends Component {
   static navigationOptions = {
-    title: "Directory"
+    title: "Products"
   };
 
   render() {
@@ -25,11 +25,24 @@ class Directory extends Component {
           <Card
             title={item.name}
             titleNumberOfLines={2}
-            featuredSubtitle={item.description}
             featured
             onPress={() => navigate("CampsiteInfo", { campsiteId: item.id })}
             image={{ uri: baseUrl + item.image }}
-          />
+            
+          >
+            <Text style={{ marginBottom: 10 }}>{item.description}</Text>
+            <Button
+              buttonStyle={{
+                borderRadius: 0,
+                marginLeft: 0,
+                marginRight: 0,
+                marginBottom: 0,
+                backgroundColor: "#86927B"
+              }}
+              title="View Item"
+              onPress={() => navigate("CampsiteInfo", { campsiteId: item.id })}
+            />
+          </Card>
         </Animatable.View>
       );
     };
