@@ -135,23 +135,6 @@ class Home extends Component {
             paddingBottom: 0
           }}
         />
-
-        <Tile
-          style={{ margin: 0, paddingTop: 0 }}
-          title="Connect With Us"
-          containerStyle={{
-            backgroundColor: "#DD7848",
-            justifyContent: "space-around"
-          }}
-        >
-          <Text style={{ marginBottom: 10, color: "white" }}>Help</Text>
-          <Text style={{ marginBottom: 10, color: "white" }}>Stores</Text>
-          <Text style={{ marginBottom: 10, color: "white" }}>App</Text>
-          <Text style={{ marginBottom: 10, color: "white" }}>Social</Text>
-         
-          <Button title="Contact Us" type="outline" raised="true" />
-         
-        </Tile>
       </ScrollView>
     );
   }

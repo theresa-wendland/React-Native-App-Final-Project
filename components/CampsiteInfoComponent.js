@@ -13,7 +13,15 @@ import {
   Divider,
   Avatar
 } from "react-native";
-import { Card, Icon, Rating, Input, Image } from "react-native-elements";
+import {
+  Card,
+  Icon,
+  Rating,
+  Input,
+  Image,
+  PricingCard,
+  ButtonGroup
+} from "react-native-elements";
 import { connect } from "react-redux";
 import { baseUrl } from "../shared/baseUrl";
 import { postFavorite, postComment } from "../redux/ActionCreators";
@@ -231,6 +239,7 @@ class CampsiteInfo extends Component {
     const comments = this.props.comments.comments.filter(
       comment => comment.campsiteId === campsiteId
     );
+    const buttons = ["Item:Cream", "Price:$5.00", "Quantity:1"];
     return (
       <ScrollView>
         <RenderCampsite
@@ -247,35 +256,37 @@ class CampsiteInfo extends Component {
           onRequestClose={() => this.toggleModal()}
         >
           <View style={styles.modal}>
-            <Card title="Shopping Cart">
-              <Text style={{fontSize:15, fontWeight:"bold", paddingBottom:5}}>Item : {campsite.name} </Text>
-              <Image
-                source={{ uri: baseUrl + campsite.image }}
-                style={{ width: 100, height: 100 }}
+            <Card
+              title="Shopping Cart"
+              image={{ uri: baseUrl + campsite.image }}
+            >
+              <ButtonGroup
+                buttons={buttons}
+                textStyle={{color:"white",fontWeight:"bold"}}
+                containerStyle={{ height: 50, backgroundColor: "#86927B" }}
               />
+              <View style={{ margin: 10 }}>
+                <Button
+                  title="View Cart"
+                  color="#413F41"
+                  onPress={() => {
+                    this.handleComment(campsiteId);
+                    this.resetForm();
+                  }}
+                />
+              </View>
+
+              <View style={{ margin: 10 }}>
+                <Button
+                  onPress={() => {
+                    this.toggleModal();
+                    this.resetForm();
+                  }}
+                  color="#86927B"
+                  title="Continue Shopping"
+                />
+              </View>
             </Card>
-
-            <View style={{ margin: 10 }}>
-              <Button
-                title="Checkout"
-                color="#413F41"
-                onPress={() => {
-                  this.handleComment(campsiteId);
-                  this.resetForm();
-                }}
-              />
-            </View>
-
-            <View style={{ margin: 10 }}>
-              <Button
-                onPress={() => {
-                  this.toggleModal();
-                  this.resetForm();
-                }}
-                color="#86927B"
-                title="Continue Shopping"
-              />
-            </View>
           </View>
         </Modal>
       </ScrollView>

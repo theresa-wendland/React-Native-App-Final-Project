@@ -41,6 +41,7 @@ class Contact extends Component {
               onPress={() => this.sendMail()}
             />
           </Card>
+          
         </Animatable.View>
       </ScrollView>
     );
